@@ -1,0 +1,19 @@
+spring:
+  application:
+    name:
+      nta_slack
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    password: nta_slack
+    username: slack
+    url: jdbc:postgresql://localhost:5432/slack_db
+
+server:
+  port: 8082
+
+
