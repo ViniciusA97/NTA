@@ -1,19 +1,35 @@
+server:
+  port: 8082
+
+logging:
+  level:
+    com.nta.slack: debug
+
 spring:
   application:
     name:
       nta_slack
 
   jpa:
-    show-sql: false
     hibernate:
       ddl-auto: update
+    show-sql: false
 
   datasource:
-    password: nta_slack
     username: slack
+    password: nta_slack
     url: jdbc:postgresql://localhost:5432/slack_db
 
-server:
-  port: 8082
-
-
+feign:
+  client:
+    config:
+      default:
+        requestInterceptors:
+          - com.nta.slack.integracao.config.WebInterceptor
+        loggerLevel: full
+slack:
+  client-id: ops
+  client-secret: put-yours
+  oauth-token:
+    bot-token: some-bot-token
+    user-token: some-user-token
