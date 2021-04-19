@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,7 +24,7 @@ public class Message {
 
     @Column
     @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
-    private Date date;
+    private LocalDateTime date;
 
     @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id")
@@ -32,7 +33,7 @@ public class Message {
     @Column
     private StatusMessage statusMessage;
 
-    private enum StatusMessage{
+    public enum StatusMessage{
         enviada,
         erro
     }
