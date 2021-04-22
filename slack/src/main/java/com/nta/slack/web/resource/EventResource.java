@@ -21,32 +21,31 @@ public class EventResource {
     @PostMapping()
     public ResponseEntity<ApiResponse> createEvent(@RequestBody CreateEvent createEvent){
 
-        Event event = this.eventService.createEvent(createEvent);
-
-
-
-        ApiResponse apiResponse = ApiResponse.builder()
-                .success(event!=null)
-                .content(event)
-                .build();
-
-        return ResponseEntity.ok(apiResponse);
+        ApiResponse event = this.eventService.createEvent(createEvent);
+        return new ResponseEntity(event, event.getHttpStatus());
     }
 
 
     @PostMapping("/messsage/{id}")
-    public ResponseEntity<?> publishMessage(@PathVariable int id,
+    public ResponseEntity<ApiResponse> publishMessage(@PathVariable int id,
                                             @RequestBody PublishMessage publishMessage){
 
-        eventService.publishMessage(publishMessage,id);
+        ApiResponse apiResponse = eventService.publishMessage(publishMessage, id);
 
-        return ResponseEntity.ok("");
+        HttpStatus httpStatus = apiResponse.getHttpStatus();
+        Object content = apiResponse.getContent();
+
+        ResponseEntity<ApiResponse> responseEntity = new ResponseEntity(apiResponse, apiResponse.getHttpStatus());
+
+        return responseEntity;
 
     }
 
     @GetMapping
     public ResponseEntity<?> getAllEvents(){
-        return new ResponseEntity<>("", HttpStatus.OK);
+
+        ApiResponse allEvent = this.eventService.getAllEvent();
+        return new ResponseEntity<>(allEvent, allEvent.getHttpStatus());
     }
 
 

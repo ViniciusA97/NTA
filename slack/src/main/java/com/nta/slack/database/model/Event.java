@@ -1,5 +1,6 @@
 package com.nta.slack.database.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,13 +19,14 @@ public class Event {
     private long id;
 
     @ManyToMany
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    @JsonManagedReference
     private List<Channel> channels;
 
     @Column
     private String name;
 
     @OneToMany
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
     private List<Message> messages;
 
 

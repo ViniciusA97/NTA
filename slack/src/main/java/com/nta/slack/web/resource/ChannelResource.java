@@ -13,7 +13,6 @@ public class ChannelResource {
                                            @RequestBody ConversationCreater conversationCreater){
 
         return ResponseEntity.ok("");
-
     }
 
 }

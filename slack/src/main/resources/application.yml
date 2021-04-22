@@ -9,7 +9,6 @@ spring:
   application:
     name:
       nta_slack
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,6 +19,9 @@ spring:
     password: nta_slack
     url: jdbc:postgresql://localhost:5432/slack_db
 
+
+
+
 feign:
   client:
     config:
@@ -27,9 +29,12 @@ feign:
         requestInterceptors:
           - com.nta.slack.integracao.config.WebInterceptor
         loggerLevel: full
+
 slack:
   client-id: ops
   client-secret: put-yours
   oauth-token:
     bot-token: some-bot-token
     user-token: some-user-token
+
+

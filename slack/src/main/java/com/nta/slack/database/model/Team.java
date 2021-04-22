@@ -1,5 +1,6 @@
 package com.nta.slack.database.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Team implements Serializable {
 
     @OneToMany()
     @JoinColumn(name = "team_id", referencedColumnName = "id")
+    @JsonManagedReference
     private List<Channel> channels;
 
 
